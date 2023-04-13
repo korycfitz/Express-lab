@@ -1,14 +1,15 @@
 // import modules
 
 import express from 'express'
-
-// create Express app
+// import the todo data
+import { sibilings } from './data/sibiling-data.js'
+// we could also do:
 
 const app = express()
 
 // configure the app (app.set)
 
-
+app.set('view engine', 'ejs')
 
 // mount Middleware (app.use)
 
@@ -21,11 +22,17 @@ app.get('/', function(req, res) {
 })
 
 app.get('/home', function(req, res) {
-  res.send('<h1>Home Page</h1>')
+  res.render('home')
 })
 
+app.get('/sibilings', function(req, res) {
+  res.render('sibilings/index', {
+    sibilings: sibilings
+  })
+})
 // tell the app to listen on port 3000
 
 app.listen(3000, function() {
   console.log('Listening on port 3000')
 })
+
